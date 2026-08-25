@@ -1,3 +1,6 @@
+import dns from "dns";
+dns.setDefaultResultOrder("ipv4first"); // Fixes Render IPv6 ENETUNREACH error for Nodemailer
+
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
