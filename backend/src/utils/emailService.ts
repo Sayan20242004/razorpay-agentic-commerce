@@ -1,15 +1,17 @@
 import nodemailer from "nodemailer";
 
+import SMTPTransport from "nodemailer/lib/smtp-transport";
+
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
-  secure: true, // true for port 465
-  family: 4,    // Forces IPv4 resolution for Render
+  secure: true,
+  family: 4, // Forces IPv4 resolution for Render
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-});
+} as SMTPTransport.Options);
 
 export interface OrderEmailDetails {
   toEmail: string;
