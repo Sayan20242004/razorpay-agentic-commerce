@@ -1,16 +1,18 @@
 import nodemailer from "nodemailer";
-
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-  family: 4, // Forces IPv4 resolution for Render
+  port: 587,            // Use 587 instead of 465 for cloud hosting
+  secure: false,        // Must be false for port 587
+  requireTLS: true,     // Forces upgrade to secure connection via STARTTLS
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+  tls: {
+    rejectUnauthorized: false // Prevents network handshake drops
+  }
 } as SMTPTransport.Options);
 
 export interface OrderEmailDetails {
